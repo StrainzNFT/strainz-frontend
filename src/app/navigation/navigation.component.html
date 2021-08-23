@@ -1,99 +1,95 @@
-<mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #drawer class="sidenav" fixedInViewport
-               [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-               [mode]="(isHandset$ | async) ? 'over' : 'side'"
-               [opened]="(isHandset$ | async) === false">
-    <div class="d-flex flex-column h-100">
-      <div class="container-fluid">
-        <div class="row justify-content-center">
-          <a routerLink="about"><img class="logo" src="assets/logo.png"/></a>
+<mat-sidenav-container class=“sidenav-container”>
+  <mat-sidenav #drawer class=“sidenav” fixedInViewport
+               [attr.role]=“(isHandset$ | async) ? ‘dialog’ : ‘navigation’”
+               [mode]=“(isHandset$ | async) ? ‘over’ : ‘side’”
+               [opened]=“(isHandset$ | async) === false”>
+    <div class=“d-flex flex-column h-100”>
+      <div class=“container-fluid”>
+        <div class=“row justify-content-center”>
+          <a routerLink=“about”><img class=“logo” src=“assets/logo.png”/></a>
 
         </div>
 
       </div>
-      <mat-nav-list class="flex-fill">
-        <a mat-list-item target="_blank" href="https://app.gitbook.com/@strainz-1/s/strainz/getting-started-with-metamask">Getting Started</a>
+      <mat-nav-list class=“flex-fill”>
+        <a mat-list-item target=“_blank” href=“https://carebuds-finance.gitbook.io/strainz/“>Strainz Playbook</a>
 
         <mat-divider></mat-divider>
 
-        <a mat-list-item routerLink="/overview" routerLinkActive="active">All Strainz</a>
+        <a mat-list-item routerLink=“/overview” routerLinkActive=“active”>All Strainz</a>
         <mat-divider></mat-divider>
-        <a *ngIf="!(inventoryShown$ | async)" mat-list-item routerLink="/inventory/strainz" routerLinkActive="active">My Wallet</a>
-        <div class="foldable-container" *ngIf="inventoryShown$ | async">
+        <a *ngIf=“!(inventoryShown$ | async)” mat-list-item routerLink=“/inventory/strainz” routerLinkActive=“active”>My Wallet</a>
+        <div class=“foldable-container” *ngIf=“inventoryShown$ | async”>
           <h>My Wallet</h>
-          <a mat-list-item routerLink="/inventory/strainz" routerLinkActive="active">Strainz</a>
-          <a mat-list-item routerLink="/offers" routerLinkActive="active">Offers</a>
+          <a mat-list-item routerLink=“/inventory/strainz” routerLinkActive=“active”>Strainz</a>
+          <a mat-list-item routerLink=“/offers” routerLinkActive=“active”>Offers</a>
         </div>
 
 
         <mat-divider></mat-divider>
 
 
-        <a *ngIf="!(marketPlaceShown$ | async)" mat-list-item routerLink="/marketplace/strainz" routerLinkActive="active">Marketplace</a>
-        <div class="foldable-container" *ngIf="marketPlaceShown$ | async">
+        <a *ngIf=“!(marketPlaceShown$ | async)” mat-list-item routerLink=“/marketplace/strainz” routerLinkActive=“active”>Marketplace</a>
+        <div class=“foldable-container” *ngIf=“marketPlaceShown$ | async”>
           <h>Marketplace</h>
-          <a mat-list-item routerLink="/marketplace/strainz" routerLinkActive="active">Strainz</a>
-          <a mat-list-item routerLink="/marketplace/accessories" routerLinkActive="active">Accessories</a>
-          <!--a mat-list-item routerLink="/marketplace/other" routerLinkActive="active">Other NFTs</a-->
+          <a mat-list-item routerLink=“/marketplace/strainz” routerLinkActive=“active”>Strainz Plants</a>
+          <a mat-list-item routerLink=“/marketplace/accessories” routerLinkActive=“active”>Accessories</a>
+          <!—a mat-list-item routerLink=“/marketplace/other” routerLinkActive=“active”>Other NFTs</a—>
         </div>
 
         <mat-divider></mat-divider>
 
-        <a mat-list-item routerLink="/stake" routerLinkActive="active">Farms</a>
-        <!--a mat-list-item routerLink="/vaults" routerLinkActive="active">Multisig</a-->
+        <a mat-list-item routerLink=“/stake” routerLinkActive=“active”>Farms</a>
+        <!—a mat-list-item routerLink=“/vaults” routerLinkActive=“active”>Multisig</a—>
 
         <mat-divider></mat-divider>
 
-        <a mat-list-item routerLink="/roadmap" routerLinkActive="active">Roadmap</a>
+        <a mat-list-item routerLink=“/roadmap” routerLinkActive=“active”>Roadmap</a>
         <mat-divider></mat-divider>
 
-        <a mat-list-item routerLink="/info" routerLinkActive="active">Token Info</a>
+        <a mat-list-item routerLink=“/info” routerLinkActive=“active”>Token Info</a>
         <mat-divider></mat-divider>
 
-        <a mat-list-item routerLink="/community" routerLinkActive="active">Community</a>
-
-        <mat-divider></mat-divider>
-
-        <a mat-list-item routerLink="/faq" routerLinkActive="active">FAQ</a>
+        <a mat-list-item routerLink=“/community” routerLinkActive=“active”>Community</a>
 
         <mat-divider></mat-divider>
 
-        <a mat-list-item routerLink="/migrate" routerLinkActive="active">Migrate from V2</a>
+        <a mat-list-item routerLink=“/faq” routerLinkActive=“active”>FAQ</a>
 
         <mat-divider></mat-divider>
 
-        <a target="_blank" mat-list-item href="https://exchange.pancakeswap.finance/#/swap?inputCurrency=BNB&outputCurrency=0xacC870D9e560f784ceFf365f56e1f12161324478" >
-                <img mat-list-icon src="https://exchange.pancakeswap.finance/favicon.png">
-          PancakeSwap <img src="assets/budz.png" class="currency">
+        <a target=“_blank” mat-list-item href=“https://exchange.pancakeswap.finance/#/swap?inputCurrency=BNB&outputCurrency=0xacC870D9e560f784ceFf365f56e1f12161324478” >
+                <img mat-list-icon src=“https://github.com/pancakeswap/pancake-frontend/blob/develop/public/favicon.ico”>
+          Buy Strainz <img src=“assets/budz.png” class=“currency”>
         </a>
-        <a target="_blank" mat-list-item href="https://exchange.pancakeswap.finance/#/swap?inputCurrency=0xacC870D9e560f784ceFf365f56e1f12161324478&outputCurrency=0x15C0C1740877CaCC5C839BF4C9BC5cEFF80D78A9" >
-          <img mat-list-icon src="https://exchange.pancakeswap.finance/favicon.png">
-          PancakeSwap<img src="assets/seedz.png" class="currency">
+        <a target=“_blank” mat-list-item href=“https://exchange.pancakeswap.finance/#/swap?inputCurrency=0xacC870D9e560f784ceFf365f56e1f12161324478&outputCurrency=0x15C0C1740877CaCC5C839BF4C9BC5cEFF80D78A9” >
+          <img mat-list-icon src=“https://github.com/pancakeswap/pancake-frontend/blob/develop/public/favicon.ico”>
+          Buy Strainz <img src=“assets/seedz.png” class=“currency”>
         </a>
 
 
 
-        <a target="_blank" mat-list-item href="https://t.me/strainz_chat">
-          <img src="https://telegram.org/img/t_logo.svg?1" class="telegram-logo" alt="Telegram"/>
+        <a target=“_blank” mat-list-item href=“https://t.me/strainz_chat”>
+          <img src=“https://telegram.org/img/t_logo.svg?1” class=“telegram-logo” alt=“Telegram”/>
           Telegram
         </a>
 
       </mat-nav-list>
 
-      <div class="row" *ngIf="(accounts$ | async)?.length">
-        <div class="col-12">
-          <div class="row justify-content-end">
-            <div *ngIf="(myStrainzTokens | async) as myStrainzTokens" class="col-auto budz-container text-right">
-              {{myStrainzTokens / 10000 | number:'1.0-2'}}
-              <img src="assets/budz.png" class="mr-3"/>
+      <div class=“row” *ngIf=“(accounts$ | async)?.length”>
+        <div class=“col-12”>
+          <div class=“row justify-content-end”>
+            <div *ngIf=“(myStrainzTokens | async) as myStrainzTokens” class=“col-auto budz-container text-right”>
+              {{myStrainzTokens / 10000 | number:’1.0-2’}}
+              <img src=“assets/budz.png” class=“mr-3”/>
             </div>
           </div>
         </div>
-        <div class="col-12">
-          <div class="row justify-content-end">
-            <div *ngIf="(mySeedzTokens | async) as mySeedz" class="col-auto budz-container text-right">
-              {{mySeedz / 1000000000000000000 | number:'1.0-2'}}
-              <img src="assets/seedz.png"  class="mr-3"/>
+        <div class=“col-12”>
+          <div class=“row justify-content-end”>
+            <div *ngIf=“(mySeedzTokens | async) as mySeedz” class=“col-auto budz-container text-right”>
+              {{mySeedz / 1000000000000000000 | number:’1.0-2’}}
+              <img src=“assets/seedz.png”  class=“mr-3”/>
             </div>
           </div>
         </div>
@@ -105,10 +101,10 @@
 
 
 
-      <div class="container-fluid pb-3">
-        <div class="onboard-button row justify-content-center align-self-end" *ngIf="accounts$ | async as accounts">
-          <button class="col-10" *ngIf="!accounts.length" mat-flat-button color="accent" (click)="connectWallet()">Connect</button>
-          <button class="col-10 address-button" mat-flat-button color="accent" (click)="connectWallet()" *ngIf="accounts.length">{{accounts[0]}}</button>
+      <div class=“container-fluid pb-3”>
+        <div class=“onboard-button row justify-content-center align-self-end” *ngIf=“accounts$ | async as accounts”>
+          <button class=“col-10” *ngIf=“!accounts.length” mat-flat-button color=“accent” (click)=“connectWallet()”>Connect</button>
+          <button class=“col-10 address-button” mat-flat-button color=“accent” (click)=“connectWallet()” *ngIf=“accounts.length”>{{accounts[0]}}</button>
         </div>
       </div>
 
@@ -121,15 +117,15 @@
 
   </mat-sidenav>
   <mat-sidenav-content>
-    <mat-toolbar color="primary" class="position-relative">
+    <mat-toolbar color=“primary” class=“position-relative”>
       <button
-        type="button"
-        aria-label="Toggle sidenav"
+        type=“button”
+        aria-label=“Toggle sidenav”
         mat-mini-fab
-        color="accent"
-        (click)="drawer.toggle()"
-        *ngIf="isHandset$ | async">
-        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+        color=“accent”
+        (click)=“drawer.toggle()”
+        *ngIf=“isHandset$ | async”>
+        <mat-icon aria-label=“Side nav toggle icon”>menu</mat-icon>
       </button>
 
 
