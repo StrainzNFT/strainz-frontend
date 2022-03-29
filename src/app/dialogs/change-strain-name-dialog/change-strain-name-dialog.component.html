@@ -1,0 +1,33 @@
+<h2 mat-dialog-title>Change name of {{data.prefix}} {{data.postfix}}</h2>
+<mat-dialog-content class="mat-typography">
+<div class="container">
+  <app-strain-image [matCard]="true" [strain]="data"></app-strain-image>
+  <div class="row">
+    <div class="col-12 col-md-6">
+      <mat-form-field appearance="fill">
+        <mat-label>First name</mat-label>
+        <input #prefixInput matInput required type="text" minlength="2" maxlength="16">
+      </mat-form-field>
+
+    </div>
+    <div class="col-12 col-md-6">
+      <mat-form-field appearance="fill">
+        <mat-label>Last name</mat-label>
+        <input #postfixInput matInput required type="text" minlength="2" maxlength="16">
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <button [disabled]="!prefixInput.checkValidity() ||
+      !postfixInput.checkValidity() || changing" mat-flat-button color="primary"
+              (click)="changeName(prefixInput.value, postfixInput.value)">
+        <span *ngIf="changing">Changing..</span>
+        <span *ngIf="!changing && !changing">Change</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+
+</mat-dialog-content>

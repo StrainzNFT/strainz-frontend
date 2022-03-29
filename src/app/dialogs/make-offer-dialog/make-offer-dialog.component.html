@@ -1,0 +1,21 @@
+<h2 mat-dialog-title>Make Offer for {{data.prefix}} {{data.postfix}}</h2>
+<mat-dialog-content class="mat-typography">
+  <app-strain-image [matCard]="true" [strain]="data"></app-strain-image>
+  <div class="row">
+    <div class="col">
+      <mat-form-field appearance="fill">
+        <mat-label>Price (in STRAINZ)</mat-label>
+        <input #priceInput matInput required type="number" min="1">
+      </mat-form-field>
+    </div>
+    <div class="col">
+      <button [disabled]="!priceInput.checkValidity() || offering || approving" mat-flat-button color="primary" (click)="offer(+priceInput.value)">
+        <span *ngIf="approving">Approving..</span>
+        <span *ngIf="offering">Offering..</span>
+        <span *ngIf="!offering && !approving">Offer</span>
+      </button>
+    </div>
+  </div>
+
+
+</mat-dialog-content>

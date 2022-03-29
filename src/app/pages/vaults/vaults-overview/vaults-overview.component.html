@@ -1,0 +1,42 @@
+<div *ngIf="!(account$ | async) else vaultsTemplate" class="container">
+  <div class="row justify-content-center">
+
+    <div class="col-12 text-center">
+      <h1>Please connect your wallet</h1>
+
+    </div>
+    <div class="col-auto">
+      <button mat-raised-button color="accent" (click)="onboard()">Connect Wallet</button>
+
+    </div>
+  </div>
+</div>
+
+<ng-template #vaultsTemplate>
+  <div class="container-fluid">
+    <div class="row justify-content-center pt-3">
+      <div class="col-12 col-md-3">
+
+            <button class="w-100" mat-raised-button color="accent" (click)="createVault()">Create Vault</button>
+
+      </div>
+    </div>
+
+    <ng-container *ngIf="vaults$ | async as vaults">
+      <mat-card class="mt-3" *ngIf="vaults.length > 0">
+        <mat-card-header>
+          <mat-card-title>My Vaults</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <mat-action-list>
+            <button mat-list-item routerLink="/vaults/{{vault.address}}" *ngFor="let vault of vaults">{{vault.name}}</button>
+          </mat-action-list>
+        </mat-card-content>
+      </mat-card>
+      <h3 *ngIf="vaults.length === 0">You are not part of any Vaults</h3>
+    </ng-container>
+
+
+
+  </div>
+</ng-template>

@@ -1,0 +1,18 @@
+<div class="container-fluid mt-2">
+  <div class="row justify-content-end">
+    <div class="col-auto pr-5">
+      <mat-form-field appearance="outline">
+        <mat-label>Sort by</mat-label>
+        <mat-select [ngModel]="sort.sortBy" (ngModelChange)="changeSortProperty($event)">
+          <mat-option [value]="StrainzSortProperty.GrowRate">Growth Rate</mat-option>
+          <mat-option [value]="StrainzSortProperty.BreedingCost">Breeding Cost</mat-option>
+          <mat-option [value]="StrainzSortProperty.Price">Price</mat-option>
+          <mat-option [value]="StrainzSortProperty.Roi">ROI</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button [@rotatedState]="sort.direction" mat-icon-button (click)="changeDirection()">
+        <mat-icon>south</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>

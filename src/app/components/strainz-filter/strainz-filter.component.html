@@ -1,0 +1,60 @@
+<mat-card class="w-100">
+  <form [formGroup]="filterForm" (ngSubmit)="submit()">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12 col-lg-3 pb-3 pb-lg-0">
+          <div class="row mb-1">
+            <div class="col text-center font-weight-bold">
+                Max Strainz <img src="assets/budz.png" class="budz"> Growth / Day: {{filterForm.value.growRateRange[0]}} - {{filterForm.value.growRateRange[1]}}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <p-slider formControlName="growRateRange" [range]="true"  [min]="growRateMin" [max]="growRateMax"></p-slider>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-lg-3 pb-3 pb-lg-0">
+          <div class="row mb-1">
+            <div class="col text-center font-weight-bold">
+              Breeding Cost: {{filterForm.value.breedingCostRange[0] | number:'1.0-4'}} - {{filterForm.value.breedingCostRange[1] | number:'1.0-4'}}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <p-slider formControlName="breedingCostRange" [range]="true" [min]="breedingCostMin" [max]="breedingCostMax"></p-slider>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-lg-3 pb-3 pb-lg-0">
+          <div class="row mb-1">
+            <div class="col text-center font-weight-bold">
+              Price: {{filterForm.value.priceRange[0] / 10000 | number:'1.0-4'}} - {{filterForm.value.priceRange[1] / 10000 | number:'1.0-4'}}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <p-slider formControlName="priceRange" [range]="true"  [min]="priceMin" [max]="priceMax"></p-slider>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-lg-3 mb-2 mb-lg-0">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Accessories</mat-label>
+            <mat-select formControlName="accessories" multiple>
+              <mat-option [value]="null" (onSelectionChange)="changeToDontCare($event)">I don't care</mat-option>
+              <mat-option (onSelectionChange)="changeAccessory($event)" *ngFor="let accessory of accessoryList" [value]="accessory">{{accessory | accessoryType}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row justify-content-end">
+        <div class="col-12 col-lg-2">
+            <button color="primary" mat-raised-button class="w-100" type="submit">Apply</button>
+        </div>
+      </div>
+
+    </div>
+
+  </form>
+</mat-card>

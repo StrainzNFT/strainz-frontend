@@ -1,0 +1,48 @@
+<section>
+  <app-strainz-filter *ngIf="loaded"
+    [priceMin]="priceMin"
+    [priceMax]="priceMax"
+    [growRateMin]="growRateMin"
+    [growRateMax]="growRateMax"
+    [breedingCostMin]="breedingCostMin"
+    [breedingCostMax]="breedingCostMax"
+    (filterChanged)="applyFilter($event)"
+  ></app-strainz-filter>
+</section>
+<section>
+  <app-strainz-sort-header (sortChanged)="sortChanged($event)"></app-strainz-sort-header>
+</section>
+<section class="container-fluid">
+  <div *ngIf="(openTrades$ | async) as trades" class="row">
+    <div class="col-12 col-md-auto flex-grow-1 strain-card" *ngFor="let trade of trades">
+      <app-strain-card [strain]="trade.strain" [trade]="trade" [isPublic]="true" [approvedStrainzTokens]="approvedBudz"></app-strain-card>
+    </div>
+
+
+  </div>
+  <h1>Last Trades</h1>
+  <mat-action-list *ngIf="(lastTrades$ | async) as trades" class="mb-5">
+    <mat-list-item *ngFor="let trade of trades" routerLink="/strain/{{trade.tokenId}}">
+      <app-strain-image mat-list-avatar [strain]="trade.strain" [avatar]="true"></app-strain-image>
+      <h3 matLine>{{trade.strain.prefix}} {{trade.strain.postfix}} <small>Gen: {{trade.strain.generation}}</small></h3>
+      <p matLine>
+        <span> </span>
+        <span class="demo-2">
+          <app-blockie [address]="trade.poster"></app-blockie>
+          <mat-icon>arrow_right_alt</mat-icon>
+          <app-blockie [address]="trade.buyer"></app-blockie>
+          for {{+trade.strainzTokenPrice / 10000}}          <img class="budz" src="assets/budz.png">
+ </span>
+      </p>
+    </mat-list-item>
+
+  </mat-action-list>
+
+
+</section>
+<div class="paginator-container">
+  <mat-paginator (page)="paging($event)"  [length]="strainAmount"
+                 [pageSize]="500" [showFirstLastButtons]="true"
+                 [pageSizeOptions]="[10, 25, 50, 100, 500]">
+  </mat-paginator>
+</div>

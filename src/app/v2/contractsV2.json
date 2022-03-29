@@ -1,0 +1,13 @@
+{
+
+  "strainzMasterAddress": "0xDBEA85Ce8d2BFfAA292E6def9B22a5DAa40d716E",
+  "strainzNFTAddress": "0x196546f21c30f1b4b5846ed6a1bd2f7c6c2f6db5",
+  "strainzTokenAddress": "0x18fcd272fcbb41cf048c89695dfeb6a8d298beb1",
+  "seedzTokenAddress": "0x789597a72aff54fadea196c13fa1011c2e3c2a1e",
+  "strainzAccessoryAddress": "0x526322ac7ddf1b7da4967d33a4b03f53ab757a59",
+  "strainzMarketplaceAddress": "0xfdf8f3c8d34dc3f6bbc51098173acbd59e344548",
+  "pool1LP": "0x130B56CbF46bc3cbD3Cf737B7C16CA28F1B3429E",
+  "pool2LP": "0x33cd5cB015BB77F9248093cd4f111bDd63477ec1",
+  "router": "0x10ED43C718714eb63d5aA57B78B54704E256024E",
+  "wbnb": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c"
+}

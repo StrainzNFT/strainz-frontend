@@ -1,0 +1,68 @@
+<mat-card>
+  <mat-card-header class="position-relative">
+    <mat-card-title>
+      {{poolname}}
+      <div class="card-action" *ngIf="!v2">
+        {{withdrawMode ? 'Withdraw' : 'Deposit'}}
+        <mat-slide-toggle [ngModel]="withdrawMode" (ngModelChange)="onToggle($event)">
+        </mat-slide-toggle>
+      </div>
+
+    </mat-card-title>
+    <mat-card-subtitle *ngIf="!v2">APY: {{apr | number:'1.0-2'}}% </mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="poolForm" (ngSubmit)="depositOrWithdraw()">
+
+      <div class="row">
+        <div class="col-12 col-md-6">
+          <div class="row">
+            <div class="col-12">
+              My LP tokens: {{pool?.balance / 1000000000000000000}}
+            </div>
+            <div class="col-12">
+              Staked: {{pool?.staked / 1000000000000000000}}
+            </div>
+            <div class="col-12">
+              Claimable: {{pool?.claimable / 1000000000000000000 | number:'1.0-2'}} SEEDZ
+            </div>
+
+          </div>
+        </div>
+        <div class="col-12 col-md-6">
+          <div class="row">
+            <div class="col-12">
+              <mat-form-field *ngIf="visible">
+                <mat-label>Amount</mat-label>
+                <input min="0" [formControlName]="withdrawMode ? 'withdraw' : 'deposit'" matInput type="number">
+                <button type="button" mat-button matSuffix (click)="setMax()" [attr.aria-label]="'Max'">
+                  MAX
+                </button>
+              </mat-form-field>
+            </div>
+
+          </div>
+
+
+        </div>
+        <div class="col-12 col-md-6" *ngIf="!v2">
+          <div class="row">
+            <div class="col-12">
+              <a *ngIf="poolId === 1" target="_blank" href="https://exchange.pancakeswap.finance/#/add/0xacC870D9e560f784ceFf365f56e1f12161324478/0x15C0C1740877CaCC5C839BF4C9BC5cEFF80D78A9">Provide Liquidity</a>
+              <a *ngIf="poolId === 0" target="_blank" href="https://exchange.pancakeswap.finance/#/add/0xacC870D9e560f784ceFf365f56e1f12161324478/BNB">Provide Liquidity</a>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+      <div class="row">
+        <div class="col-12 col-md-6">
+          <button [disabled]="!validForm || doing || approving" color="accent" mat-raised-button
+                  type="submit">{{buttonText}}</button>
+        </div>
+      </div>
+    </form>
+
+  </mat-card-content>
+</mat-card>

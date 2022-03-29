@@ -1,0 +1,57 @@
+
+.section-hero {
+  width: 100%;
+  background-image:
+    url("/assets/background_sun42.png"),
+    url("/assets/background_clouds42.png"),
+    url("/assets/background_clouds_242.png"),
+    url("/assets/background_bottom42.png");
+  background-position: top, top, top, bottom;
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+}
+
+  #StrainzHeading {
+    font-weight: bold;
+  }
+
+  #P2eHeading {
+    font-size: 2.2em;
+    font-weight: bold;
+}
+
+  @media screen and (min-width: 576px){
+  #P2eHeading {
+    font-size: 3em;
+    font-weight: bold;
+    }
+  }
+
+  @media screen and (min-width: 992px){
+  #P2eHeading {
+    font-size: 5em;
+    font-weight: bold;
+  }
+}
+
+.strain-img {
+  max-height: 200px;
+  margin-top: -50px;
+  object-fit: contain;
+}
+
+.strain-img-home {
+  padding: 10% auto;
+  background-color: slategrey;
+}
+
+.card-about {
+  max-width: 600px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+

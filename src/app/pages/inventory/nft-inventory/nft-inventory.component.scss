@@ -1,0 +1,26 @@
+.row {
+  margin-bottom: 10px;
+  mat-card {
+    margin-top: 10px;
+
+
+    img {
+      max-height: 300px;
+      object-fit: contain;
+    }
+
+    button {
+      width: 100%;
+    }
+    .harvest-title{
+      display: flex;
+      align-items: center;
+      img {
+        margin-left: 4px;
+        max-height: 15px;
+        object-fit: contain;
+      }
+    }
+  }
+}
+

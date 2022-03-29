@@ -1,0 +1,18 @@
+<h2 mat-dialog-title>Transfer {{data.plant.prefix}} {{data.plant.postfix}}</h2>
+<mat-dialog-content class="mat-typography">
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-auto">
+        <app-strain-image [strain]="data.plant" [matCard]="false"></app-strain-image>
+      </div>
+    </div>
+  </div>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Receiver Address</mat-label>
+    <input #receiverInput matInput required minlength="42" maxlength="42">
+  </mat-form-field>
+  <button [disabled]="!receiverInput.checkValidity()" mat-flat-button color="primary" (click)="transfer(receiverInput.value)">
+    Transfer
+  </button>
+</mat-dialog-content>

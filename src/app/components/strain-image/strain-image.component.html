@@ -1,0 +1,9 @@
+<ng-container *ngIf="getSpecial(strain._id) as special">
+
+  <img [height]="height" mat-card-image *ngIf="special !== 'none' && matCard" src="assets/{{special}}.png" alt="Strain Image">
+  <img [height]="height" mat-card-image *ngIf="special === 'none' && matCard" src="https://api.strainz.tech/image/{{strain.dna}}" alt="Strain Image">
+  <img [height]="height" mat-list-avatar *ngIf="special !== 'none' && !matCard && avatar" src="assets/{{special}}.png" alt="Strain Image">
+  <img [height]="height" mat-list-avatar *ngIf="special === 'none' && !matCard && avatar" src="https://api.strainz.tech/image/{{strain.dna}}" alt="Strain Image">
+  <img [height]="height" *ngIf="special !== 'none' && !matCard && !avatar" src="assets/{{special}}.png" alt="Strain Image">
+  <img [height]="height" *ngIf="special === 'none' && !matCard && !avatar" src="https://api.strainz.tech/image/{{strain.dna}}" alt="Strain Image">
+</ng-container>

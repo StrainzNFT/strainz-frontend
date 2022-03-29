@@ -1,0 +1,110 @@
+<div class="container" *ngIf="!(account$ | async) else migration">
+  <div class="row justify-content-center" >
+
+    <div class="col-12 text-center">
+      <h1>Please connect your wallet</h1>
+
+    </div>
+    <div class="col-auto">
+      <button mat-raised-button color="accent" (click)="onboard()">Connect Wallet</button>
+    </div>
+  </div>
+</div>
+<ng-template #migration>
+  <section class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <mat-vertical-stepper [linear]="false" #stepper>
+          <mat-step>
+            <ng-template matStepLabel>Clear Marketplace</ng-template>
+            <p>First, make sure to cancel all Listings on the marketplace!</p>
+
+            <div>
+              <button mat-button matStepperNext>Next</button>
+            </div>
+          </mat-step>
+          <mat-step>
+            <ng-template matStepLabel>Migrate NFTs</ng-template>
+            <div class="row">
+              <div class="col-auto">
+                <button mat-raised-button color="primary" [disabled]="migrating" (click)="migrateNFTs(stepper)">Migrate NFTs</button>
+
+              </div>
+              <div class="col-auto">
+                <button mat-raised-button color="primary" [disabled]="migrating" (click)="migrateAccessories(stepper)">Migrate Accessories</button>
+
+              </div>
+            </div>
+
+            <div>
+              <button mat-button matStepperPrevious>Back</button>
+              <button mat-button matStepperNext>Next</button>
+            </div>
+          </mat-step>
+          <mat-step>
+            <ng-template matStepLabel>Remove Liquidity</ng-template>
+              <div class="row">
+                <div class="col-12 col-md-6">
+                  <app-pool [poolId]="0" [v2]="true"></app-pool>
+                </div>
+                <div class="col-12 col-md-6">
+                  <app-pool [poolId]="1" [v2]="true"></app-pool>
+                </div>
+              </div>
+            <h3>Withdraw your staked LP tokens first, then use the "Remove Liquidity" Buttons!</h3>
+            <div class="row justify-content-around">
+              <div class="col-12 col-md-3">
+                <a class="w-100" mat-raised-button color="primary" href="https://exchange.pancakeswap.finance/#/remove/BNB/0x18fCD272FCBB41Cf048c89695DFEB6A8d298beb1" target="_blank"  [disabled]="migrating" >Remove STRAINZ/BNB Liquidity</a>
+              </div>
+              <div class="col-12 col-md-3">
+                <a class="w-100" mat-raised-button color="primary" target="_blank" href="https://exchange.pancakeswap.finance/#/remove/0x18fCD272FCBB41Cf048c89695DFEB6A8d298beb1/0x789597A72aFF54fADea196c13fA1011C2e3c2a1E" [disabled]="migrating" >Remove STRAINZ/SEEDZ Liquidity</a>
+              </div>
+            </div>
+            <div>
+              <button mat-button matStepperPrevious>Back</button>
+              <button mat-button matStepperNext>Next</button>
+            </div>
+          </mat-step>
+          <mat-step>
+            <ng-template matStepLabel>Migrate Strainz and Seedz</ng-template>
+            <button mat-raised-button color="primary" [disabled]="migrating" (click)="migrateTokens(stepper)">Migrate Tokens</button>
+
+            <div>
+              <button mat-button matStepperPrevious>Back</button>
+              <button mat-button matStepperNext>Next</button>
+            </div>
+          </mat-step>
+          <mat-step>
+            <ng-template matStepLabel>Add Liquidity</ng-template>
+            <div class="row justify-content-around">
+              <div class="col-12 col-md-3">
+                <a class="w-100" mat-raised-button color="primary" href="https://exchange.pancakeswap.finance/#/add/0xacC870D9e560f784ceFf365f56e1f12161324478/BNB" target="_blank"  [disabled]="migrating" >Add STRAINZ/BNB Liquidity</a>
+              </div>
+              <div class="col-12 col-md-3">
+                <a class="w-100" mat-raised-button color="primary" target="_blank" href="https://exchange.pancakeswap.finance/#/add/0xacC870D9e560f784ceFf365f56e1f12161324478/0x15C0C1740877CaCC5C839BF4C9BC5cEFF80D78A9" [disabled]="migrating" >Add STRAINZ/SEEDZ Liquidity</a>
+              </div>
+            </div>
+            <h3>Provide Liquidity on Pancakeswap, then use the <a routerLink="/stake">Farms</a> to stake your LP Tokens!</h3>
+            <div>
+              <button mat-button matStepperPrevious>Back</button>
+              <button mat-button matStepperNext>Next</button>
+            </div>
+          </mat-step>
+          <mat-step>
+            <ng-template matStepLabel>Done</ng-template>
+            <p>You are now done.</p>
+            <div>
+              <button mat-button matStepperPrevious>Back</button>
+              <button mat-button (click)="stepper.reset()">Reset</button>
+            </div>
+          </mat-step>
+        </mat-vertical-stepper>
+      </div>
+    </div>
+
+  </section>
+
+</ng-template>
+
+
+

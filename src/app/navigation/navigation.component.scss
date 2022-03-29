@@ -1,0 +1,89 @@
+.sidenav-container {
+  height: 100%;
+}
+
+.sidenav {
+  width: 200px;
+}
+
+.sidenav .mat-toolbar {
+  background: inherit;
+}
+
+h3 {
+  line-height: 0;
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+
+  background-image: url("/assets/banner-text.png"), url("/assets/banner-left-dk.png"), url("/assets/banner-right-dk.png");
+  background-position: center, left, right;
+  background-size: auto 100px;
+  background-repeat: no-repeat;
+  height: 100px;
+
+
+}
+
+.currency {
+  width: 16px;
+  height: 16px;
+}
+mat-sidenav-content {
+  background: lightgray;
+}
+
+.address-button {
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.logo {
+  height: 80px;
+  width: 80px;
+  object-fit: contain;
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+.onboard-button {
+  align-self: flex-end;
+}
+
+mat-nav-list {
+  a {
+    &.active {
+      color: white;
+      background-color: #3a5929;
+    }
+  }
+}
+.budz-container {
+  display: flex;
+  align-items: center;
+  img {
+    margin-left: 4px;
+    max-width: 24px;
+    object-fit: contain;
+
+  }
+
+}
+.telegram-logo {
+  margin-left: 3px;
+  margin-right: 3px;
+  width: 26px;
+}
+
+.foldable-container {
+  background-color: lightgray;
+}
+
+.dmMR-4{
+  margin-right: 8%;
+}
+
+

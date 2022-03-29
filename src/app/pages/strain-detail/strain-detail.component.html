@@ -1,0 +1,52 @@
+<section class="container" *ngIf="plant$ | async as plant">
+  <div class="row">
+    <div class="col">
+      <app-strain-card [isMine]="isMine$ | async" [hideSharingButton]="true" [isPublic]="true" [strain]="plant"
+                       [trade]="trade$ | async"></app-strain-card>
+    </div>
+  </div>
+  <ng-container *ngIf="offers$ | async as offers">
+    <div class="row mt-3" *ngIf="offers.length > 0">
+      <div class="col-12">
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>Offers</mat-card-title>
+          </mat-card-header>
+          <mat-list>
+            <mat-list-item *ngFor="let offer of offers" routerLink="/strain/{{offer.tokenId}}">
+              <h3 matLine>
+                <div class="row align-items-center">
+                  <div class="col-auto">
+                    <app-blockie mat-list-avatar [address]="offer.offerer"></app-blockie>
+                  </div>
+                  <div class="col-auto">
+                    {{+offer.offerAmount / 10000}}
+
+                    <img class="budz" src="assets/budz.png">
+                  </div>
+                </div>
+
+                <span class="actions">
+                  <button *ngIf="isMine$ | async" (click)="acceptOffer($event, offer)" mat-raised-button
+                          color="primary"> <mat-icon>check</mat-icon> Accept Offer </button>
+                  <button *ngIf="(account$ | async) === offer.offerer" (click)="cancelOffer($event, offer)"
+                          mat-raised-button color="warn"> <mat-icon>close</mat-icon> Cancel Offer </button>
+                </span>
+              </h3>
+
+
+            </mat-list-item>
+          </mat-list>
+        </mat-card>
+      </div>
+    </div>
+  </ng-container>
+
+</section>
+<section class="container" *ngIf="missing">
+  <div class="row mt-5">
+    <div class="col text-center">
+      <h1>Strain not found.</h1>
+    </div>
+  </div>
+</section>

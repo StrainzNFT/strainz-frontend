@@ -1,0 +1,76 @@
+<h2 mat-dialog-title>Breed {{data.strain1.prefix}} {{data.strain1.postfix}} <span
+  *ngIf="partnerSelected">with {{strain2.prefix}} {{strain2.postfix}}</span></h2>
+<mat-dialog-content class="mat-typography">
+  <div class="container">
+    <div class="row justify-content-center align-items-center">
+      <div class="col-12 col-md-5 padding">
+        <app-strain-image [strain]="data.strain1"></app-strain-image>
+      </div>
+      <div class="col-12 col-md-1 text-center ">
+        <mat-icon>
+          add
+        </mat-icon>
+      </div>
+      <div class="col-12 col-md-6">
+        <div class="row justify-content-center">
+          <div *ngIf="partnerSelected" class="col-auto">
+            <app-strain-image class="w-100" [strain]="strain2"></app-strain-image>
+          </div>
+          <div class="col-12">
+            <mat-form-field class="example-full-width">
+              <input matInput (ngModelChange)="strain2 = $event"
+                     placeholder="Breeding Partner"
+                     aria-label="Breeding Partner"
+                     [matAutocomplete]="auto"
+                     [formControl]="partnerCtrl">
+              <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                <mat-option *ngFor="let plant of filteredPlants | async" [value]="plant">
+                  <app-strain-image [strain]="plant" [height]="25" [matCard]="false"></app-strain-image>
+
+                  <span>{{plant.prefix}} {{plant.postfix}}</span> |
+                  <small>Generation: {{plant.generation}}</small>
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+
+
+    <div class="row justify-content-end align-items-center">
+      <div class="col-12 col-md-3" *ngIf="averageGrowRate > 128">
+        <mat-slide-toggle (change)="breedFertilizer = $event.checked">Use Breeding Fertilizer</mat-slide-toggle>
+      </div>
+      <div *ngIf="partnerSelected" class="col-12 col-md-3 budz-container justify-content-md-end justify-content-center mb-1">
+        <span class="cost-container">
+          Cost: <span class="mat-body-strong">{{breedingCost}}</span>
+        </span>
+        <img src="assets/budz.png">
+        <span *ngIf="breedFertilizer">
+          1000 <img src="assets/seedz.png">
+        </span>
+      </div>
+      <div class="col-12 col-md-3 mb-1"  *ngIf="partnerSelected && (allowedStrainzTokens$ | async) < breedingCost && !data.vault" >
+        <button [disabled]="approving" mat-flat-button color="primary"
+                (click)="approve()">
+          <span *ngIf="approving">Approving..</span>
+          <span *ngIf="!approving">Approve</span>
+        </button>
+      </div>
+      <div class="col-12 col-md-3 mb-1">
+
+        <button [disabled]="!partnerSelected || ((allowedStrainzTokens$ | async) < breedingCost && !data.vault) || breeding" mat-flat-button color="primary"
+                (click)="breed()">
+          <span *ngIf="breeding">Breeding..</span>
+          <span *ngIf="!breeding">Breed</span>
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+
+</mat-dialog-content>

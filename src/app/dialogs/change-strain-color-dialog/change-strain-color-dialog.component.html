@@ -1,0 +1,17 @@
+<h2 mat-dialog-title>Change color of {{data.prefix}} {{data.postfix}}</h2>
+<mat-dialog-content class="mat-typography">
+  <app-strain-image [matCard]="true" [strain]="data"></app-strain-image>
+  <div class="row align-items-center">
+    <div class="col">
+        <input [(colorPicker)]="color" [style.background]="color" cpAlphaChannel="disabled"/>
+    </div>
+    <div class="col">
+      <button [disabled]="changing || !color" mat-flat-button color="primary" (click)="changeColor()">
+        <span *ngIf="changing">Changing..</span>
+        <span *ngIf="!changing && !changing">Change</span>
+      </button>
+    </div>
+  </div>
+
+
+</mat-dialog-content>

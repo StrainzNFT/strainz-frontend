@@ -1,0 +1,73 @@
+section {
+  min-height: calc(100vh - 100px);
+  background-image: url("/assets/background_bottom.png"), url("/assets/background_sun.png");
+  background-position: bottom, top;
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+}
+
+
+.huge {
+
+  @media (min-width: 992px) {
+    font-size: 100px;
+  }
+  @media (max-width: 992px) and (min-width: 600px) {
+    font-size: 80px;
+  }
+  @media (max-width: 600px) {
+    font-size: 50px;
+  }
+  color: #FAFAFA;
+
+}
+
+
+.roadmap-text {
+  position: absolute;
+  top: 86px;
+  color: black;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  @media (min-width: 992px) {
+    font-size: 30px;
+  }
+  @media (max-width: 992px) and (min-width: 600px) {
+    font-size: 20px;
+  }
+  @media (max-width: 600px) {
+    font-size: 16px;
+  }
+}
+
+.q3 {
+  @media (max-width: 600px) {
+    padding-top: 15%;
+  }
+  @media (max-width: 992px) and (min-width: 600px) {
+    padding-top: 10%;
+    padding-bottom: 6%;
+  }
+  @media (min-width: 992px) {
+    padding-bottom: 10%;
+  }
+}
+
+.q4 {
+  @media (max-width: 600px) {
+    padding-top: 25%;
+  }
+  @media (max-width: 992px) and (min-width: 600px) {
+    padding-top: 15%;
+    padding-bottom: 60%;
+  }
+  @media (min-width: 992px) {
+    padding-bottom: 42%;
+  }
+}
+.avatar {
+  border-radius: 50%;
+  width: 128px;
+  height: 128px;
+  display: block;
+  margin: 0 auto;
+}

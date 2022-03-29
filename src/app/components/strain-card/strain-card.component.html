@@ -1,0 +1,150 @@
+<mat-card class="position-relative" >
+  <div class="row justify-content-center px-3">
+    <div class="col-12 rounded-img" [ngStyle]="strainColor(strain)">
+      <div class="row justify-content-center">
+        <div class="col-auto">
+          <app-strain-image [matCard]="true" [strain]="strain"></app-strain-image>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <h3 class="w-100 mt-3">
+    {{strain.prefix}} {{strain.postfix}} <small class="text-muted">#{{strain._id}}</small>
+
+
+
+  </h3>
+  <div class="row justify-content-between">
+    <div class="col-auto">
+      <span>Gen. {{strain.generation}}</span>
+
+    </div>
+    <div class="col-auto">
+        <span *ngIf="hasAccessory()" class="harvest-title">
+    Acc. Boost: +{{getAccessoryBoost() | number: '1.0-0'}} <img src="assets/budz.png" class="budz">
+  </span>
+    </div>
+  </div>
+  <span class="harvest-title"
+                     *ngIf="(strain?.harvestableAmount?.asObservable() | async) as harvestable">
+    <span>Harvestable: {{harvestable / 10000 | number:'1.0-1'}}</span>
+    <img src="assets/budz.png"/>
+  </span>
+  <span class="harvest-title">
+    <span>Breeding Cost: {{strain.breedingCost}}</span>
+    <img src="assets/budz.png"/>
+  </span>
+
+  <div class="fertilizer-box">
+    <div *ngIf="fertilizerActive(strain.lastFertilizer)">
+      <img matTooltip="Remaining time: {{fertilizerDuration(strain.lastFertilizer) | timeUntil}}"
+           src="assets/grow_fertilizer.png" class="grow-fertilizer d-block">
+      <div class="text-muted">Fertilized</div>
+    </div>
+
+  </div>
+
+
+  <ng-container *ngIf="(strain?.currentGrowRate?.asObservable() | async) as currentGrowRate else publicGrowRate">
+    <div class="row justify-content-between mt-2">
+        <div class="col-auto mat-caption">Grows {{yieldByGrowRate(currentGrowRate)}}<span
+          *ngIf="fertilizerActive(strain.lastFertilizer)" matTooltip="Fertilizer Bonus">(+160)</span> <img
+          src="assets/budz.png" class="budz"/> / Day
+        </div>
+      <div class="col-auto mat-caption ">Max {{yieldByGrowRate(+strain.growRate)}} <img src="assets/budz.png" class="budz"/> / Day
+      </div>
+    </div>
+
+
+
+    <div class="progress">
+      <div class="progress-bar current-grow-bar" role="progressbar"
+           [style.width]="currentGrowRateBarStyle(currentGrowRate)">
+      </div>
+      <div class="progress-bar max-grow-bar" role="progressbar"
+           [style.width]="maxGrowRateBarStyle(+strain.growRate, currentGrowRate)">
+      </div>
+    </div>
+  </ng-container>
+  <ng-template #publicGrowRate>
+    <div class="mat-caption ">Max {{yieldByGrowRate(+strain.growRate)}} <img src="assets/budz.png" class="budz"/> / Day
+    </div>
+
+    <div class="progress">
+      <div class="progress-bar max-grow-bar" role="progressbar" [style.width]="maxGrowRateBarStyle(+strain.growRate)">
+      </div>
+    </div>
+  </ng-template>
+
+
+  <div class="row mt-3">
+    <div class="col button-col">
+      <button *ngIf="!isPublic && !trade" mat-flat-button color="primary" (click)="breed(strain)">Breed</button>
+
+    </div>
+    <div class="col button-col">
+      <button *ngIf="!isPublic && !trade" mat-flat-button color="primary" (click)="sell(strain)">Sell</button>
+
+    </div>
+    <div class="col-auto button-col" *ngIf="!isPublic && !trade">
+      <button mat-flat-button color="accent" [matMenuTriggerFor]="menu" >...</button>
+      <mat-menu #menu="matMenu" yPosition="above">
+        <button mat-menu-item (click)="transfer(strain)">
+          <mat-icon>send</mat-icon>
+          <span>Transfer</span>
+          </button>
+
+        <button mat-menu-item (click)="compost(strain)">
+          <mat-icon>delete</mat-icon>
+          <span>Compost</span>
+
+        </button>
+
+        <button mat-menu-item *ngIf="!fertilizerActive(strain.lastFertilizer) && !isPublic && !trade" (click)="fertilize()">
+          <mat-icon>yard</mat-icon>
+          <span>Fertilize</span>
+        </button>
+        <button mat-menu-item (click)="changeName(strain)">
+          <mat-icon>drive_file_rename_outline</mat-icon>
+          <span>Change name</span>
+
+        </button>
+        <button mat-menu-item (click)="changeColor(strain)">
+          <mat-icon>palette</mat-icon>
+          <span>Change color</span>
+
+        </button>
+      </mat-menu>
+    </div>
+
+    <div class="col" *ngIf="trade && !isPublic">
+      <button mat-flat-button color="accent" (click)="cancelTrade(trade)">Cancel Listing</button>
+    </div>
+
+    <div class="col" *ngIf="isPublic && !isMine && !trade">
+      <button mat-flat-button color="accent" (click)="makeOffer(strain)">Make Offer</button>
+    </div>
+
+
+    <div class="col" *ngIf="trade && isPublic">
+      <button mat-flat-button color="accent" (click)="buyTrade(trade)">Buy for {{trade.strainzTokenPrice / 10000}} <img
+        src="assets/budz.png" class="budz"></button>
+    </div>
+
+    <div class="col-auto mt-2">
+      <a routerLink="/strain/{{strain._id}}" *ngIf="!hideSharingButton">
+        <mat-icon color="primary">share</mat-icon>
+      </a>
+
+      <button class="copy" (click)="copyURL()" matTooltip="Copy URL" *ngIf="hideSharingButton" mat-icon-button>
+        <mat-icon color="primary">content_paste</mat-icon>
+      </button>
+    </div>
+
+
+
+
+  </div>
+
+</mat-card>

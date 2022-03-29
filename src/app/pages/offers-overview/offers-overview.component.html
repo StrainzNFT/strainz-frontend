@@ -1,0 +1,81 @@
+<div class="container" *ngIf="!(account$ | async) else offerOverview">
+  <div class="row justify-content-center">
+
+    <div class="col-12 text-center">
+      <h1>Please Connect Your Wallet</h1>
+
+    </div>
+    <div class="col-auto">
+      <button mat-raised-button color="accent" (click)="onboard()">Connect Wallet</button>
+    </div>
+  </div>
+</div>
+
+<ng-template #offerOverview>
+  <section class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-auto text-center permanent-marker">
+        <h3>My Offers</h3>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <mat-card>
+          <mat-action-list *ngIf="myOffers$ | async as myOffers">
+            <mat-list-item *ngFor="let offer of myOffers" routerLink="/strain/{{offer.tokenId}}">
+              <app-strain-image mat-list-avatar [strain]="offer.strain" [avatar]="true"></app-strain-image>
+              <h3 matLine>{{offer.strain.prefix}} {{offer.strain.postfix}}
+                <small>Gen: {{offer.strain.generation}}</small>
+                <span class="actions">
+                  <button (click)="cancelOffer($event, offer)"  mat-raised-button color="warn"> <mat-icon>close</mat-icon> Cancel Offer </button>
+                </span>
+              </h3>
+              <p matLine>
+                <span> </span>
+                <span class="demo-2">
+                  {{+offer.offerAmount / 10000}}
+                  <img class="budz" src="assets/budz.png">
+                </span>
+              </p>
+
+            </mat-list-item>
+          </mat-action-list>
+        </mat-card>
+
+
+      </div>
+    </div>
+    <div class="row justify-content-center mt-3">
+      <div class="col-auto text-center permanent-marker">
+        <h3>Offers to me</h3>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <mat-card>
+          <mat-action-list *ngIf="offersToMe$ | async as offersToMe">
+            <mat-list-item *ngFor="let offer of offersToMe" routerLink="/strain/{{offer.tokenId}}">
+              <app-strain-image mat-list-avatar [strain]="offer.strain" [avatar]="true"></app-strain-image>
+              <h3 matLine>{{offer.strain.prefix}} {{offer.strain.postfix}}
+                <small>Gen: {{offer.strain.generation}}</small>
+                <span class="actions">
+                  <button (click)="acceptOffer($event, offer)"  mat-raised-button color="primary"> <mat-icon>check</mat-icon> Accept Offer </button>
+
+                </span>
+              </h3>
+              <p matLine>
+                <span> </span>
+                <span class="demo-2">
+                  {{+offer.offerAmount / 10000}}
+                  <img class="budz" src="assets/budz.png">
+                </span>
+              </p>
+
+            </mat-list-item>
+          </mat-action-list>
+        </mat-card>
+      </div>
+    </div>
+  </section>
+
+</ng-template>

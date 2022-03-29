@@ -1,0 +1,11 @@
+.section-hero2 {
+  width: 100%;
+  background-image:
+    url("/assets/background_sun42.png"),
+    url("/assets/background_clouds42.png"),
+    url("/assets/background_clouds_242.png"),
+    url("/assets/background_bottom42.png");
+  background-position: top, top, top, bottom;
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+}

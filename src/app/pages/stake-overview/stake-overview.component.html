@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="row justify-content-center" *ngIf="!(account$ | async)">
+
+    <div class="col-12 text-center">
+      <h1>Please Connect Your Wallet</h1>
+
+    </div>
+    <div class="col-auto">
+      <button mat-raised-button color="accent" (click)="onboard()">Connect Wallet</button>
+
+    </div>
+  </div>
+
+  <div class="row mt-3">
+    <div class="col-12 col-md-6">
+      <app-pool [poolId]="0"></app-pool>
+    </div>
+    <div class="col-12 col-md-6">
+      <app-pool [poolId]="1"></app-pool>
+
+    </div>
+  </div>
+</div>

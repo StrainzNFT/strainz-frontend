@@ -1,0 +1,11 @@
+{
+  "strainzNFTAddress": "0x2Bc47E45ABbB6Bc55890EaB4940AA9946e24560F",
+  "strainzTokenAddress": "0xacC870D9e560f784ceFf365f56e1f12161324478",
+  "seedzTokenAddress": "0x15C0C1740877CaCC5C839BF4C9BC5cEFF80D78A9",
+  "strainzAccessoryAddress": "0xa93661ebA2330A97a2D900A114D2177d0d33807A",
+  "strainzMarketplaceAddress": "0x9FdEF90bEf37341177e2B71f1DB76Ac13CBceCe7",
+  "migration": "0x96F5A0CAB03B8880BfEfE9Da67170D49063a64a4",
+  "pool1": "0x6640a3c50b5948819518d1617e6207f173e24276",
+  "pool2": "0xca6d340a6917742f72c348eb03f3198011d5f523",
+  "strainzMultisigVaultFactoryAddress": ""
+}

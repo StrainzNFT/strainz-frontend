@@ -1,0 +1,44 @@
+.row {
+  margin-bottom: 10px;
+
+}
+.budz {
+  max-height: 16px !important;
+  object-fit: contain !important;
+}
+.top-card {
+  margin-left: -10px;
+  margin-right: -10px;
+  img {
+    max-height: 24px;
+    margin-left: 4px;
+    object-fit: contain;
+  }
+}
+.budz-container {
+  display: flex;
+  align-items: center;
+  img {
+    margin-left: 4px;
+    max-width: 24px;
+    object-fit: contain;
+
+  }
+
+}
+.accessory-icon {
+  height: 128px;
+  object-fit: contain;
+}
+
+.accessory-image {
+  height: 128px;
+}
+
+.strain-card {
+  padding-left: 5px;
+  padding-right: 5px;
+  @media (min-width: 576px) {
+    max-width: 390px;
+  }
+}

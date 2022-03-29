@@ -1,0 +1,30 @@
+.row {
+  margin-bottom: 10px;
+  mat-card {
+    margin-top: 10px;
+
+
+    img:not(.budz) {
+      max-height: 300px;
+      object-fit: contain;
+    }
+  }
+}
+
+.buy-button {
+  position: absolute;
+  left: 32px;
+  top: 90px;
+}
+
+.cancel-button {
+  position: absolute;
+  left: 32px;
+  top: 100px;
+}
+.paginator-container {
+  position: fixed;
+  border: 1px solid lightgray;
+  bottom: 0;
+  right: 0;
+}

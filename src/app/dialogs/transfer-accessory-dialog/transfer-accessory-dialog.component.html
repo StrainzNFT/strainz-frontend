@@ -1,0 +1,12 @@
+<h2 mat-dialog-title>Transfer {{data.accessory.type | accessoryType}}</h2>
+<mat-dialog-content class="mat-typography">
+  <img mat-card-image src="{{data.accessory.type | accessoryImage}}" alt="Accessory Image">
+
+  <mat-form-field appearance="fill">
+    <mat-label>Receiver Address</mat-label>
+    <input #receiverInput matInput required minlength="42" maxlength="42">
+  </mat-form-field>
+  <button [disabled]="!receiverInput.checkValidity()" mat-flat-button color="primary" (click)="transfer(receiverInput.value)">
+    Transfer
+  </button>
+</mat-dialog-content>

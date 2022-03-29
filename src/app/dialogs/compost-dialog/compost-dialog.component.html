@@ -1,0 +1,41 @@
+<h2 mat-dialog-title>Compost {{data.strain.prefix}} {{data.strain.postfix}}</h2>
+<mat-dialog-content class="mat-typography">
+  <div class="container">
+    <div class="row justify-content-center align-items-center">
+      <div class="col-12 col-md-5">
+        <app-strain-image [strain]="data.strain" [matCard]="true"></app-strain-image>
+        <p>Warning: </p>
+        <p>By composting a plant you will receive all attached accessories and the plant is going to be destroyed (not revertible).</p>
+      </div>
+      <div class="col-12 col-md-1 text-center ">
+        <mat-icon>
+          arrow_right_alt
+        </mat-icon>
+      </div>
+      <div class="col-12 col-md-6">
+        <div class="row justify-content-center">
+          <h2 class="col-12 text-center mb-3 mat-body-2">You will receive:</h2>
+          <div class="col-12 mt-2 mb-2" *ngFor="let accessory of data.strain.accessories">
+            <img class="accessory" mat-card-image src="{{accessory | accessoryImage}}" alt="Accessory Image">
+          </div>
+          <div class="col-12 seedz-container mb-1 text-center">
+              <h1 class="mat-body-strong">{{compostedSeedsAmount}} <img src="assets/seedz.png"></h1>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row justify-content-end align-items-center">
+      <div class="col-12 col-md-3 mb-1">
+        <button [disabled]="!(!data.vault) || composting" mat-flat-button color="primary"
+                (click)="compost()">
+          <span *ngIf="composting">Composting..</span>
+          <span *ngIf="!composting">Compost</span>
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+
+</mat-dialog-content>

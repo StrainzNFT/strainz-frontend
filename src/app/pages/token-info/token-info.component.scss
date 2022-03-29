@@ -1,0 +1,12 @@
+.prices-right {
+  @media (min-width: 992px) {
+    text-align: right;
+  }
+  text-align: center;
+}
+.prices-left {
+  @media (min-width: 992px) {
+    text-align: left;
+  }
+  text-align: center;
+}

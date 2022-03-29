@@ -1,0 +1,30 @@
+img {
+  max-height: 300px;
+  object-fit: contain;
+}
+mat-form-field {
+  display: inline;
+}
+button {
+  width: 100%;
+}
+
+.budz-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  img {
+    margin-left: 4px;
+    max-height: 24px;
+    object-fit: contain;
+  }
+}
+
+.cost-container {
+  text-align: right;
+}
+.padding {
+  padding-bottom: 50px;
+  padding-left: 64px;
+}

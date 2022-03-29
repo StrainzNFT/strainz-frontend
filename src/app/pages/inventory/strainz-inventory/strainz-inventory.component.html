@@ -1,0 +1,103 @@
+<div class="container">
+  <div class="row justify-content-center" *ngIf="!(account)">
+
+    <div class="col-12 text-center">
+      <h1>Please Connect Your Wallet</h1>
+
+    </div>
+    <div class="col-auto">
+      <button mat-raised-button color="accent" (click)="onboard()">Connect Wallet</button>
+    </div>
+  </div>
+</div>
+
+<section *ngIf="(strains$ | async) as strains" class="container-fluid">
+  <mat-card class="top-card mt-1" *ngIf="account">
+    <div class="row justify-content-center">
+
+      <div class="col-12 col-md-auto budz-container pb-3 pb-md-0">
+        {{(myStrainzTokens$ | async) / 10000 | number:'1.0-2'}}
+        &nbsp;<strong>Strainz</strong> <img src="assets/budz.png">
+        <span class="ml-1">{{(mySeedzTokens$  | async) / 1000000000000000000 | number:'1.0-2' }}</span>
+        &nbsp;<strong>Seedz</strong> <img src="assets/seedz.png">
+
+      </div>
+
+      <div class="col-12 col-md-4">
+        <button class="w-100" color="accent" mat-raised-button (click)="harvestAndWaterAll()">
+          <span>Harvest & Water ({{(totalHarvestAmount - totalWaterCost) / 10000 | number:'1.0-2'}}</span>
+          <img src="assets/budz.png">
+          <span>)</span>
+        </button>
+      </div>
+
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <mat-expansion-panel hideToggle>
+          <mat-expansion-panel-header [collapsedHeight]="'64px'" [expandedHeight]="'64px'">
+            <div class="justify-content-center h-100 w-100 d-flex">
+              <span [matBadge]="myJoints$ | async" matBadgeColor="warn"><img class="accessory-icon"
+                                                                             src="assets/joint.png"></span>
+              <span [matBadge]="mySunglasses$ | async" matBadgeColor="warn"><img class="accessory-icon"
+                                                                                 src="assets/sunglasses.png"></span>
+              <span [matBadge]="myEarrings | async" matBadgeColor="warn"><img class="accessory-icon"
+                                                                              src="assets/earring.png"></span>
+            </div>
+          </mat-expansion-panel-header>
+          <div class="row">
+            <div class="col-6 col-md-auto" *ngFor="let accessory of myAccessories$ | async">
+              <mat-card>
+                <mat-card-header>
+                  <mat-card-title>{{accessory.type | accessoryType}}</mat-card-title>
+                  <mat-card-subtitle>Boost: +{{accessory.boost}} Grow Rate
+                  </mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                  <img class="accessory-image" src="{{accessory.type | accessoryImage}}"/>
+                  <div class="row mt-3">
+                    <div class="col mt-2">
+                      <button [disabled]="!account" mat-flat-button color="primary"
+                              (click)="attachAccessory(accessory)">Attach
+                      </button>
+                    </div>
+                    <div class="col mt-2">
+                      <button mat-flat-button color="primary" (click)="transferAccessory(accessory)">Transfer</button>
+                    </div>
+                    <div class="col mt-2">
+                      <button mat-flat-button color="primary" (click)="sellAccessory(accessory)">Sell</button>
+                    </div>
+                  </div>
+                </mat-card-content>
+              </mat-card>
+            </div>
+          </div>
+
+        </mat-expansion-panel>
+      </div>
+    </div>
+  </mat-card>
+  <div class="row" *ngIf="strains.length > 0 && account">
+    <div class="col-12 col-md-6 col-lg-4 col-xl-3 px-1" *ngFor="let trade of myTrades.slice().reverse()">
+      <app-strain-card [trade]="trade" [strain]="trade.strain"></app-strain-card>
+    </div>
+
+  </div>
+<div class="row justify-content-center" *ngIf="strains.length === 0 && account">
+  <div  class="col-6">
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-6">
+        <h3 class="text-center">You don't have any Strainz yet. Did you <a routerLink="/migrate">migrate</a> them?</h3>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="row justify-content-start">
+
+    <div class="col-12 col-md-auto flex-grow-1 strain-card" *ngFor="let strain of strains">
+      <app-strain-card [strain]="strain" ></app-strain-card>
+    </div>
+  </div>
+
+</section>

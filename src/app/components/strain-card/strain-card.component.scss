@@ -1,0 +1,68 @@
+mat-card {
+  margin-top: 10px;
+  min-width: 330px;
+  img {
+    max-height: 300px;
+    object-fit: contain;
+  }
+
+  button:not(.copy) {
+    width: 100%;
+  }
+
+  .harvest-title{
+    display: flex;
+    align-items: center;
+    img {
+      margin-left: 4px;
+      max-height: 15px;
+      object-fit: contain;
+    }
+  }
+}
+.current-grow-bar {
+  background-color: #006193;
+}
+.max-grow-bar {
+  background-color: #3a5929;
+}
+.budz {
+  max-height: 16px !important;
+  object-fit: contain !important;
+}
+
+.fertilizer-box {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.grow-fertilizer {
+  border-radius: 10px !important;
+  width: 64px;
+  height: 64px;
+  &.disabled {
+    filter: opacity(25%);
+    &:hover {
+      filter: opacity(100%);
+      cursor: pointer;
+    }
+  }
+}
+
+.accessory {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+.rounded-img {
+  border-radius: 20px;
+}
+.button-col {
+  &:first-child {
+    padding-left: 15px;
+  }
+  padding-left: 5px;
+  padding-right: 5px;
+}

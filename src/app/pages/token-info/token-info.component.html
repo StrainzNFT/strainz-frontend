@@ -1,0 +1,106 @@
+<section class="container permanent-marker">
+  <ng-container *ngIf="totalStrainzSupply$ | async as totalStrainzSupply">
+    <ng-container *ngIf="totalSeedzSupply$ | async as totalSeedzSupply">
+
+
+      <div class="row mb-3 mt-4">
+        <div class="col-12 text-center">
+          <h2>Total Supply</h2>
+        </div>
+        <div class="col-12 col-md-6 my-1 text-center">
+
+          <h2>{{totalStrainzSupply / 10000 | number:'1.0-0'}} Strainz <img src="assets/budz.png" class="budz"></h2>
+
+        </div>
+        <div class="col-12 col-md-6  my-1 text-center">
+          <h2>{{totalSeedzSupply / 1000000000000000000 | number:'1.0-0'}} Seedz <img src="assets/seedz.png" class="budz"> </h2>
+
+        </div>
+      </div>
+    </ng-container>
+  </ng-container>
+
+
+  <ng-container *ngIf="strainzSeedzRoute$ | async as strainzSeedzRoute">
+    <ng-container *ngIf="strainzBnbRoute$ | async as strainzBnbRoute">
+      <ng-container *ngIf="strainzBusdRoute$ | async as strainzBusdRoute">
+        <ng-container *ngIf="seedzBusdRoute$ | async as seedzBusdRoute">
+
+          <div class="row">
+            <div class="col-12 text-center">
+              <h2>Prices</h2>
+            </div>
+            <div class="col-12 col-md-6 my-1 prices-left">
+              <mat-card>
+                <h2>1 BNB = {{strainzBnbRoute.midPrice.toSignificant(6) / 10000 | number:'1.0-6'}} <img src="assets/budz.png"
+                                                                                                class="budz"></h2>
+                <h2>1 <img src="assets/budz.png" class="budz">
+                  = {{strainzBnbRoute.midPrice.invert().toSignificant(6) * 10000 | number:'1.0-6'}} BNB</h2>
+                <h2>1 <img src="assets/budz.png" class="budz">
+                  = {{strainzBusdRoute.midPrice.invert().toSignificant(6) * 10000 | number:'1.0-6'}} BUSD</h2>
+              </mat-card>
+
+            </div>
+            <div class="col-12 col-md-6 prices-right my-1">
+              <mat-card>
+
+                <h2>1 <img src="assets/budz.png" class="budz">
+                  = {{strainzSeedzRoute.midPrice.invert().toSignificant(6) * 10000 | number:'1.0-6'}}  <img
+                    src="assets/seedz.png" class="budz"></h2>
+                <h2>1 <img src="assets/seedz.png" class="budz">
+                  = {{strainzSeedzRoute.midPrice.toSignificant(6) / 10000 | number:'1.0-6'}}
+                  <img src="assets/budz.png" class="budz"></h2>
+                <h2>1 <img src="assets/seedz.png" class="budz">
+                  = {{seedzBusdRoute.midPrice.invert().toSignificant(6) | number:'1.0-6'}} BUSD
+                  </h2>
+              </mat-card>
+            </div>
+          </div>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+  </ng-container>
+
+  <ng-container *ngIf="strainzBnbPair$ | async as strainzBnbPair">
+    <ng-container *ngIf="strainzSeedzPair$ | async as strainzSeedzPair">
+
+      <div class="row mt-5">
+        <div class="col-12 text-center">
+          <h2>Liquidity</h2>
+        </div>
+        <div class="col-12 col-md-6 my-1 ">
+          <mat-card>
+            <mat-card-header>
+              <mat-card-title>STRAINZ / BNB</mat-card-title>
+              <mat-card-subtitle>TVL: {{strainzBnbTVL | number:'1.0-0'}} BUSD</mat-card-subtitle>
+            </mat-card-header>
+
+            <h2 class="prices-left"> {{strainzBnbPair.reserveOf(STRAINZ).toSignificant(6) / 10000 | number:'1.0-6'}} <img src="assets/budz.png" class="budz"></h2>
+            <h2 class="prices-left"> {{strainzBnbPair.reserveOf(BNB).toSignificant(6)| number:'1.0-6'}} BNB</h2>
+            <h5 class="prices-left"> Contract Address: 0xacc870d9e560f784ceff365f56e1f12161324478  </h5>
+          </mat-card>
+
+        </div>
+        <div class="col-12 col-md-6  my-1">
+          <mat-card>
+            <mat-card-header>
+              <mat-card-title>STRAINZ / SEEDZ</mat-card-title>
+              <mat-card-subtitle>TVL: {{seedzStrainzTVL | number:'1.0-0'}} BUSD</mat-card-subtitle>
+
+            </mat-card-header>
+
+            <h2 class="prices-right"> {{strainzSeedzPair.reserveOf(STRAINZ).toSignificant(6) / 10000| number:'1.0-6'}} <img src="assets/budz.png"
+                                                                                                                            class="budz"></h2>
+            <h2 class="prices-right"> {{strainzSeedzPair.reserveOf(SEEDZ).toSignificant(6)| number:'1.0-6'}} <img src="assets/seedz.png"
+                                                                                                                  class="budz"></h2>
+            <h5 class="prices-right"> Contract Address: 0x15C0C1740877CaCC5C839BF4C9BC5cEFF80D78A9  </h5>
+
+          </mat-card>
+        </div>
+      </div>
+    </ng-container>
+  </ng-container>
+
+
+
+</section>

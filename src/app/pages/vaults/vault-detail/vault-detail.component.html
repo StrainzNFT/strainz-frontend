@@ -1,0 +1,130 @@
+<div *ngIf="!(account$ | async) else vaultTemplate" class="container">
+  <div class="row justify-content-center">
+
+    <div class="col-12 text-center">
+      <h1>Please connect your wallet</h1>
+
+    </div>
+    <div class="col-auto">
+      <button mat-raised-button color="accent" (click)="onboard()">Connect Wallet</button>
+
+    </div>
+  </div>
+</div>
+
+<ng-template #vaultTemplate>
+  <ng-container *ngIf="account$ | async as account">
+    <section class="container-fluid" *ngIf="vault$ | async as vault">
+      <mat-card class="top-card mt-1">
+        <div class="row justify-content-start">
+          <div class="col-12 col-md-auto budz-container pb-3 pb-md-0">
+            Balance: {{budzBalance}}
+            <img src="assets/budz.png">
+          </div>
+          <div class="col-12 col-md-3 pb-3 pb-md-0">
+            <button class="w-100" mat-raised-button (click)="withdrawBudz(vault)">Withdraw
+              <img src="assets/budz.png">
+            </button>
+          </div>
+          <div class="col-12 col-md-6">
+            <button class="w-100" color="accent" mat-raised-button (click)="harvestAll(vault)">
+              <span>Harvest all ({{totalHarvestAmount$ | async}}</span>
+              <img src="assets/budz.png">
+              <span>)</span>
+            </button>
+          </div>
+        </div>
+      </mat-card>
+
+      <div *ngIf="vault.proposals | async as proposals" class="mt-3">
+        <h3>Proposals</h3>
+        <mat-accordion>
+          <mat-expansion-panel *ngFor="let proposal of proposals">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <ng-container *ngIf="proposal.proposalType === ProposalType.WithdrawBudz">
+                  Withdraw {{proposal.amount}} STRAINZ
+                </ng-container>
+                <ng-container *ngIf="proposal.proposalType === ProposalType.WithdrawNFT && getPlant(proposal.tokenId) as plant">
+                  Withdraw {{plant.prefix}} {{plant.postfix}}
+                </ng-container>
+                <ng-container *ngIf="proposal.proposalType === ProposalType.Breed
+                && getPlant(proposal.breedId1) as plant1">
+                  <ng-container *ngIf="getPlant(proposal.breedId2) as plant2">
+                    Breed {{plant1.prefix}} {{plant1.postfix}} with {{plant2.prefix}} {{plant2.postfix}} for {{getBreedCost(plant1, plant2)}} STRAINZ
+                  </ng-container>
+                </ng-container>
+                <small class="ml-3" [class.hidden]="!proposal.executed">Executed</small>
+
+              </mat-panel-title>
+              <mat-panel-description>
+                <ng-container *ngIf="proposal.proposalType === ProposalType.WithdrawBudz">
+                  <mat-icon>arrow_right_alt</mat-icon> {{proposal.receiver}}
+                </ng-container>
+                <ng-container *ngIf="proposal.proposalType === ProposalType.WithdrawNFT && getPlant(proposal.tokenId) as plant">
+                  <mat-icon>arrow_right_alt</mat-icon> {{proposal.receiver}}
+                </ng-container>
+              </mat-panel-description>
+
+            </mat-expansion-panel-header>
+            <mat-list>
+              <mat-list-item *ngFor="let signer of vault.signers">
+                <mat-icon class="mr-3" matListIcon [color]="getSignedColor(proposal, signer.address)">{{getSignedIcon(proposal, signer.address)}}</mat-icon>
+                <app-blockie class="mr-3" [address]="signer.address"></app-blockie>
+                <p>{{signer.name}}</p>
+              </mat-list-item>
+            </mat-list>
+
+            <mat-action-row>
+              <button mat-raised-button color="primary" (click)="signProposal(proposal, vault)" [disabled]="proposal.signers.includes(account)">Sign Proposal</button>
+            </mat-action-row>
+
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
+
+      <div class="row justify-content-center">
+        <div *ngIf="plants.length === 0" class="col-6">
+          <div class="row justify-content-center">
+            <div class="col-12 col-md-6">
+              <h3 class="text-center">No Strainz NFTs in Vault yet.</h3>
+            </div>
+          </div>
+
+        </div>
+        <div class="col-12 col-md-6 col-lg-4 col-xl-3 px-1" *ngFor="let strain of plants">
+          <mat-card>
+            <mat-card-header>
+              <mat-card-title>{{strain.prefix}} {{strain.postfix}}</mat-card-title>
+              <mat-card-subtitle>Generation: {{strain.generation}}</mat-card-subtitle>
+              <mat-card-subtitle class="harvest-title"
+                                 *ngIf="(strain.harvestableAmount.asObservable() | async) as harvestable">
+                <span>Harvestable: {{harvestable}}</span>
+                <img src="assets/budz.png"/>
+              </mat-card-subtitle>
+              <mat-card-subtitle class="harvest-title">
+                <span>Breeding Cost: {{strain.breedingCost}}</span>
+                <img src="assets/budz.png"/>
+              </mat-card-subtitle>
+            </mat-card-header>
+
+            <app-strain-image [strain]="strain" [matCard]="true"></app-strain-image>
+            <span class="mat-caption">Grows {{yieldByGrowRate(+strain.growRate)}} <img src="assets/budz.png" class="budz"/> / Day</span>
+            <mat-progress-bar mode="determinate" [value]="growRate(strain)"></mat-progress-bar>
+            <div class="row mt-3">
+              <div class="col mt-2">
+                <button mat-flat-button color="primary" (click)="transfer(strain, vault)">Transfer</button>
+              </div>
+              <div class="col mt-2">
+                <button mat-flat-button color="primary" (click)="breed(strain, vault)">Breed</button>
+              </div>
+            </div>
+
+          </mat-card>
+        </div>
+      </div>
+
+    </section>
+  </ng-container>
+</ng-template>
+
