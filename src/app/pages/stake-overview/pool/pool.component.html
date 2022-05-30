@@ -48,8 +48,12 @@
         <div class="col-12 col-md-6" *ngIf="!v2">
           <div class="row">
             <div class="col-12">
-              <a *ngIf="poolId === 1" target="_blank" href="https://exchange.pancakeswap.finance/#/add/0xacC870D9e560f784ceFf365f56e1f12161324478/0x15C0C1740877CaCC5C839BF4C9BC5cEFF80D78A9">Provide Liquidity</a>
-              <a *ngIf="poolId === 0" target="_blank" href="https://exchange.pancakeswap.finance/#/add/0xacC870D9e560f784ceFf365f56e1f12161324478/BNB">Provide Liquidity</a>
+              <a *ngIf="poolId === 1"
+                 href="https://pancakeswap.finance/add/0xacC870D9e560f784ceFf365f56e1f12161324478/0x15C0C1740877CaCC5C839BF4C9BC5cEFF80D78A9"
+                 target="_blank">Provide Liquidity</a>
+              <a *ngIf="poolId === 0"
+                 href="https://pancakeswap.finance/add/BNB/0xacC870D9e560f784ceFf365f56e1f12161324478" target="_blank">Provide
+                Liquidity</a>
             </div>
           </div>
         </div>

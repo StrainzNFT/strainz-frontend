@@ -14,10 +14,14 @@
       <mat-nav-list class="flex-fill">
 
         <mat-divider></mat-divider>
+        <a href="https://strainz420.gitbook.io/strainz/" mat-list-item target="_blank">Getting started</a>
+
+        <mat-divider></mat-divider>
 
         <a mat-list-item routerLink="/overview" routerLinkActive="active">All Strainz</a>
         <mat-divider></mat-divider>
-        <a *ngIf="!(inventoryShown$ | async)" mat-list-item routerLink="/inventory/strainz" routerLinkActive="active">My Wallet</a>
+        <a *ngIf="!(inventoryShown$ | async)" mat-list-item routerLink="/inventory/strainz" routerLinkActive="active">My
+          Wallet</a>
         <div class="foldable-container" *ngIf="inventoryShown$ | async">
           <h class="p-3">My Wallet</h>
           <a mat-list-item routerLink="/inventory/strainz" routerLinkActive="active">Strainz NFTs</a>
